@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root{
+    --primary-color: #6B2E2E;
+    --secondary-color: #2F3B33;
+    --background-color: #F7F3EC;
+    --accent-color: #B08D57;
+    --text-color: #2A2622;
+}
+
+body{
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+nav{
+    color: var(--background-color);
+}
+
+button{
+    cursor: pointer;
+}
+
+button:hover{
+    -tw-brightness: brightness(0.8);
+}

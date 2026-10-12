@@ -25,7 +25,7 @@ export default function AdminBar({ expanded, onToggle }: AdminBarProps) {
                     {expanded ? <BsTextRight className="w-6 h-6" /> : <BsArrowBarRight className="w-6 h-6" />}
                 </button>
             </div>
-            <div className="flex items-center justify-center gap-2 bg-gray-100 h-full px-2 mr-4">
+            <div className="flex items-center justify-center gap-2 bg-gray-100 h-full px-2 mr-6">
                 <p>{session?.user.firstName} {session?.user.lastName}</p>
                 <div className="size-2 bg-green-600 rounded-full" />
             </div>

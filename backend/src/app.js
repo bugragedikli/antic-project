@@ -21,5 +21,7 @@ app.use(express.json());
 
 
 //routes
+import adminRoutes from "./routes/admin.routes.js";
+app.use("/api/admin", adminRoutes);
 
 export default app;

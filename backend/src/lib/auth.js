@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import pool from "../config/db.js";
 import { APIError } from "better-auth/api";
+import { admin } from "better-auth/plugins";
 
 // Returns the trimmed value or throws a 400 the client can show
 const validateName = (value, label) => {
@@ -18,6 +19,9 @@ const buildDisplayName = (firstName, lastName) =>
   `${firstName} ${lastName.charAt(0).toUpperCase()}.`;
 
 export const auth = betterAuth({
+  plugins: [
+    admin(),
+  ],
   database: pool,
   emailAndPassword: {
     enabled: true,

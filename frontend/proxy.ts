@@ -16,5 +16,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
     // Pages that require login; add new ones here
-    matcher: ["/account/:path*", "/sell/:path*"],
+    matcher: ["/account/:path*", "/admin/:path*"],
 };

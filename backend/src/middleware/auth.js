@@ -25,3 +25,14 @@ export const optionalAuth = async (req, res, next) => {
     req.session = session.session;
     next();
 };
+
+// Use after protect: protect sets req.user
+export const requireAdmin = (req, res, next) => {
+    const roles = req.user?.role?.split(",") ?? [];
+
+    if (!roles.includes("admin")) {
+        return res.status(403).json({ message: "Forbidden" });
+    }
+
+    next();
+};

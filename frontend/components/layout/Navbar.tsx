@@ -1,12 +1,27 @@
 import Link from "next/link";
 import { BsSearch } from "react-icons/bs";
+import UserMenu from "./UserMenu";
+import NavSelect from "./NavSelect";
+
+const currencies = [
+    { value: "EUR", label: "EUR (€)" },
+    { value: "USD", label: "USD ($)" },
+    { value: "GBP", label: "GBP (£)" },
+];
+
+const languages = [
+    { value: "en", label: "English" },
+    { value: "fr", label: "French" },
+    { value: "es", label: "Spanish" },
+    { value: "de", label: "German" },
+];
 
 export default function Navbar(){
     return (
         <nav className="w-full bg-(--secondary-color)">
             <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-2">
-                <Link href="/"><h2 className="text-lg font-bold bg-(--primary-color) p-2">anticstore.com</h2></Link>
-                <form action="/search" className="group relative w-full max-w-md">
+                <Link href="/"><h2 className="font-extrabold text-xl font-serif">anticstore.com</h2></Link>
+                <form action="/search" className="group relative w-full max-w-lg">
                     <input
                         type="search"
                         name="q"
@@ -16,22 +31,15 @@ export default function Navbar(){
                     <button
                         type="submit"
                         aria-label="Search"
-                        className="absolute inset-y-0 right-0 flex items-center px-3 text-white/60 hover:text-white group-focus-within:bg-(--primary-color) group-focus-within:text-white group-focus-within:outline-none group-focus-within:rounded-r-[1px]"
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-white/60 hover:text-white group-focus-within:bg-(--accent-color) group-focus-within:text-white group-focus-within:outline-none group-focus-within:rounded-r-[1px]"
                     >
                         <BsSearch />
                     </button>
                 </form>
                 <div className="flex items-center gap-4 text-sm">
-
-                    {/*<p className="text-white/50">|</p>*/}
-                    <Link href="/login"
-                    className="hover:underline">
-                        Login
-                    </Link>
-                    <Link href="/signup"
-                    className="bg-(--accent-color) hover:bg-(--accent-color)/80 px-4 py-2 rounded-[1px]">
-                        <p>Create Account</p>
-                    </Link>
+                    <NavSelect label="Currency" options={currencies} defaultValue="EUR" />
+                    <NavSelect label="Language" options={languages} defaultValue="en" />
+                    <UserMenu />
                 </div>
             </div>
         </nav>

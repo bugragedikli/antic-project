@@ -1,15 +1,25 @@
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import { apiLimiter } from "./middleware/rateLimit.js";
+import { toNodeHandler } from "better-auth/node";
+import { auth } from "./lib/auth.js";
 
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173', 
+    origin: process.env.CLIENT_URL || 'http://localhost:3000', 
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-}))
+}));
+
+app.use(helmet());
+app.use("/api", apiLimiter);
+
+app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.use(express.json());
-app.use(cookieParser());
+
+
+//routes
 
 export default app;

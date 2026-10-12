@@ -11,11 +11,6 @@ const pool = new Pool({
     database: process.env.DB_NAME
 });
 
-
-pool.on('connect', () => {
-    console.log('Connected to the database');
-});
-
 pool.on('error', (err) => {
     console.error('Database error', err);
 });

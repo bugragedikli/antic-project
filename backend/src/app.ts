@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { apiLimiter } from "./middleware/rateLimit.js";
+import { apiLimiter } from "./middleware/rateLimit.ts";
 import { toNodeHandler } from "better-auth/node";
-import { auth } from "./lib/auth.js";
+import { auth } from "./lib/auth.ts";
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.json());
 
 
 //routes
-import adminRoutes from "./routes/admin.routes.js";
+import adminRoutes from "./routes/admin.routes.ts";
 app.use("/api/admin", adminRoutes);
 
 export default app;

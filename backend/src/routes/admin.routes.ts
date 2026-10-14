@@ -1,6 +1,6 @@
 import express from "express";
-import { protect, requireAdmin } from "../middleware/auth.js";
-import pool from "../config/db.js";
+import { protect, requireAdmin } from "../middleware/auth.ts";
+import pool from "../config/db.ts";
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ const USERS_PAGE_SIZE = 20;
 // GET /users?q=ahmet&page=2 → matches email, first name, last name or full name
 router.get("/users", async (req, res) => {
     const q = typeof req.query.q === "string" ? req.query.q.trim().slice(0, 100) : "";
-    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const page = Math.max(parseInt(String(req.query.page)) || 1, 1);
 
     // Escape LIKE wildcards so "%" or "_" in the search box are matched literally
     const pattern = `%${q.replace(/[\\%_]/g, "\\$&")}%`;

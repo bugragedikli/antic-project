@@ -1,10 +1,10 @@
 import { betterAuth } from "better-auth";
-import pool from "../config/db.js";
+import pool from "../config/db.ts";
 import { APIError } from "better-auth/api";
 import { admin } from "better-auth/plugins";
 
 // Returns the trimmed value or throws a 400 the client can show
-const validateName = (value, label) => {
+const validateName = (value: unknown, label: string) => {
   const trimmed = typeof value === "string" ? value.trim() : "";
   if (trimmed.length === 0 || trimmed.length > 35) {
     throw new APIError("BAD_REQUEST", {
@@ -15,7 +15,7 @@ const validateName = (value, label) => {
 };
 
 // Public display name: "Buğra G."
-const buildDisplayName = (firstName, lastName) =>
+const buildDisplayName = (firstName: string, lastName: string) =>
   `${firstName} ${lastName.charAt(0).toUpperCase()}.`;
 
 export const auth = betterAuth({
@@ -28,7 +28,7 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 128,
   },
-  trustedOrigins: [process.env.CLIENT_URL],
+  trustedOrigins: process.env.CLIENT_URL ? [process.env.CLIENT_URL] : [],
   user: {
     additionalFields: {
       firstName: {

@@ -13,10 +13,11 @@
   "license": "ISC",
   "author": "Buğra Gedikli",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "dev": "node --watch src/index.ts",
+    "start": "node src/index.ts",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "better-auth": "^1.7.7",
@@ -28,6 +29,10 @@
     "pg": "^8.23.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
+    "typescript": "^7.0.2"
   }
 }

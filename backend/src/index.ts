@@ -2,17 +2,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import app from "./app.js";
+import app from "./app.ts";
 
 const startServer = async () => {
     try{
-        app.on('error', (err) => {
-            console.error('Server error:', err);
-            throw err; 
+        const server = app.listen(process.env.PORT, () => {
+            console.log(`Server is running on port ${process.env.PORT}`);
         });
 
-        app.listen(process.env.PORT, () => {
-            console.log(`Server is running on port ${process.env.PORT}`);
+        server.on('error', (err) => {
+            console.error('Server error:', err);
+            throw err;
         });
     }
     catch (error) {

@@ -1,7 +1,8 @@
+import type { Request, Response, NextFunction } from "express";
 import { fromNodeHeaders } from "better-auth/node";
-import { auth } from "../lib/auth.js";
+import { auth } from "../lib/auth.ts";
 
-export const protect = async (req, res, next) => {
+export const protect = async (req: Request, res: Response, next: NextFunction) => {
     const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers) });
 
     if (!session) {
@@ -13,7 +14,7 @@ export const protect = async (req, res, next) => {
     next();
 }
 
-export const optionalAuth = async (req, res, next) => {
+export const optionalAuth = async (req: Request, res: Response, next: NextFunction) => {
     const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers) });
 
     if (!session) {
@@ -27,7 +28,7 @@ export const optionalAuth = async (req, res, next) => {
 };
 
 // Use after protect: protect sets req.user
-export const requireAdmin = (req, res, next) => {
+export const requireAdmin = (req: Request, res: Response, next: NextFunction) => {
     const roles = req.user?.role?.split(",") ?? [];
 
     if (!roles.includes("admin")) {

@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { PiBasket } from "react-icons/pi";
+import { BsHeart, BsChevronDown } from "react-icons/bs";
+import Dropdown from "./Dropdown";
 
 export default function UserMenu() {
     const router = useRouter();
@@ -15,13 +18,14 @@ export default function UserMenu() {
 
     if (!session) {
         return (
-            <div className="flex items-center gap-4 text-sm">
+            <div className="flex items-center gap-0 text-sm">
                 <Link href="/login" className="hover:underline p-2">
                     Login
                 </Link>
+                <p>|</p>
                 <Link
                     href="/signup"
-                    className="bg-(--primary-color) hover:bg-(--primary-color)/80 px-4 py-2.5 rounded-[1px]"
+                    className="hover:underline p-2"
                 >
                     Create Account
                 </Link>
@@ -37,10 +41,27 @@ export default function UserMenu() {
 
     return (
         <div className="flex items-center gap-4 text-sm">
-            <span className="font-medium">{session.user.name}</span>
-            <button type="button" onClick={handleSignOut} className="hover:underline">
-                Logout
-            </button>
+            <Dropdown content={session.user.name}>
+                <div className="w-40 bg-white text-(--text-color) rounded-md" role="none">
+                    <Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-200 hover:rounded-t-md" role="menuitem">
+                        Account settings
+                    </Link>
+                    <hr className="block text-gray-300" />
+                    <button onClick={handleSignOut} className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-200 hover:rounded-b-md" role="menuitem">
+                        Logout
+                    </button>
+                </div>
+            </Dropdown>
+            <Dropdown content={<BsHeart className="size-5" />} hasArrow={false}>
+                <div className="w-64 p-2 bg-white text-(--text-color) rounded-md">
+                    Favorite items will be displayed here.
+                </div>
+            </Dropdown>
+            <Dropdown content={<PiBasket className="size-6" />} hasArrow={false}>
+                <div className="w-64 p-2 bg-white text-(--text-color) rounded-md">
+                    Shopping cart items will be displayed here.
+                </div>
+            </Dropdown>
         </div>
     );
 }

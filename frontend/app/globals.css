@@ -25,7 +25,3 @@ nav{
 button{
     cursor: pointer;
 }
-
-button:hover{
-    -tw-brightness: brightness(0.8);
-}

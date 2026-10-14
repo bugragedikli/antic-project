@@ -57,11 +57,11 @@ export default function UserMenu() {
                     Favorite items will be displayed here.
                 </div>
             </Dropdown>
-            <Dropdown content={<PiBasket className="size-6" />} hasArrow={false}>
+            {/* <Dropdown content={<PiBasket className="size-6" />} hasArrow={false}>
                 <div className="w-64 p-2 bg-white text-(--text-color) rounded-md">
                     Shopping cart items will be displayed here.
                 </div>
-            </Dropdown>
+            </Dropdown> */}
         </div>
     );
 }

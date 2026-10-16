@@ -1,12 +1,13 @@
 import type { Request, Response, NextFunction } from "express";
 import { fromNodeHeaders } from "better-auth/node";
 import { auth } from "../lib/auth.ts";
+import { forbidden, unauthorized } from "../lib/errors.ts";
 
 export const protect = async (req: Request, res: Response, next: NextFunction) => {
     const session = await auth.api.getSession({ headers: fromNodeHeaders(req.headers) });
 
     if (!session) {
-        return res.status(401).json({ message: 'Not authorized, no session' });
+        throw unauthorized();
     }
 
     req.user = session.user;
@@ -32,7 +33,7 @@ export const requireAdmin = (req: Request, res: Response, next: NextFunction) =>
     const roles = req.user?.role?.split(",") ?? [];
 
     if (!roles.includes("admin")) {
-        return res.status(403).json({ message: "Forbidden" });
+        throw forbidden();
     }
 
     next();

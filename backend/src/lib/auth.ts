@@ -1,3 +1,4 @@
+import { env } from "../config/env.ts";
 import { betterAuth } from "better-auth";
 import pool from "../config/db.ts";
 import { APIError } from "better-auth/api";
@@ -28,7 +29,7 @@ export const auth = betterAuth({
     minPasswordLength: 8,
     maxPasswordLength: 128,
   },
-  trustedOrigins: process.env.CLIENT_URL ? [process.env.CLIENT_URL] : [],
+  trustedOrigins: env.CLIENT_URL ? [env.CLIENT_URL] : [],
   user: {
     additionalFields: {
       firstName: {

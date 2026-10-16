@@ -1,3 +1,4 @@
+import { env } from "./config/env.ts";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -8,7 +9,7 @@ import { auth } from "./lib/auth.ts";
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000', 
+    origin: env.CLIENT_URL || 'http://localhost:3000', 
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }));
 

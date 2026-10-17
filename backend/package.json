@@ -22,7 +22,9 @@
     "db:migrate": "kysely migrate:latest && npm run db:codegen",
     "db:rollback": "kysely migrate:down",
     "db:make": "kysely migrate:make",
-    "db:status": "kysely migrate:list"
+    "db:status": "kysely migrate:list",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "better-auth": "^1.7.7",
@@ -33,6 +35,8 @@
     "helmet": "^8.3.0",
     "kysely": "^0.29.6",
     "pg": "^8.23.1",
+    "pino": "^10.4.0",
+    "pino-http": "^11.0.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -40,8 +44,12 @@
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.5",
     "@types/pg": "^8.23.1",
-    "kysely-codegen": "^0.20.0",
+    "@types/supertest": "^7.2.1",
+    "kysely-codegen": "^0.6.1",
     "kysely-ctl": "^0.21.0",
-    "typescript": "^7.0.2"
+    "pino-pretty": "^13.2.0",
+    "supertest": "^7.3.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
   }
 }

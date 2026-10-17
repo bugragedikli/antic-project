@@ -6,6 +6,8 @@ const envSchema = z.object({
     PORT: z.coerce.number().int().positive().default(5000),
     BETTER_AUTH_SECRET: z.string().min(32, "BETTER_AUTH_SECRET must be at least 32 characters"),
     CLIENT_URL: z.url().default("http://localhost:3000"),
+    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+    LOG_LEVEL: z.enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"]).default("info"),
 });
 
 const result = envSchema.safeParse(process.env);

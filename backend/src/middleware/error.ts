@@ -8,7 +8,7 @@ export const notFoundHandler: RequestHandler = (req) => {
 };
 
 // Express recognizes an error handler by its 4 parameters, so _next must stay
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
     // Response already started (e.g. during streaming): let Express close the connection
     if (res.headersSent) {
         _next(err);
@@ -36,6 +36,6 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     }
 
     // Anything else is a bug: log the details, hide them from the client
-    console.error(err);
+    req.log.error({ err }, "Unhandled error");
     res.status(500).json({ message: "Something went wrong", code: "INTERNAL_ERROR" });
 };

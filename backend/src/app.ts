@@ -6,8 +6,20 @@ import { apiLimiter } from "./middleware/rateLimit.ts";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth.ts";
 import { notFoundHandler, errorHandler } from "./middleware/error.ts";
+import { randomUUID } from "node:crypto";
+import { pinoHttp } from "pino-http";
+import { logger } from "./lib/logger.ts";
 
 const app = express();
+
+app.use(pinoHttp({
+    logger,
+    genReqId: (req, res) => {
+        const id = randomUUID();
+        res.setHeader("X-Request-Id", id);
+        return id;
+    },
+}));
 
 app.use(cors({
     origin: env.CLIENT_URL || 'http://localhost:3000', 
